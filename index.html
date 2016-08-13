@@ -1,0 +1,38 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Steam Guess</title>
+    <meta name="description" content="A game about guessing the target of a steam review">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.indigo-pink.min.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="js/vendor/firebase.js"></script>
+    <script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
+</head>
+
+<body>
+    <!-- Simple Textfield -->
+    <form action="#">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="txtInput">
+            <label class="mdl-textfield__label" for="txtInput">Type any message...</label>
+        </div>
+        <!-- Raised button with ripple -->
+        <div>
+            <button id="submitButton" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Button</button>
+        </div>
+    </form>
+    <div id="messages">
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
