@@ -48,27 +48,10 @@ app : {
 }
 #+END_SRC
 ** TODO Script that abstracts a review page into JSON
-#+BEGIN_SRC javascript
-var review = {};
-review["text"] = document.getElementById("ReviewText").innerHTML;
-review["author"] = document.getElementsByClassName("profile_small_header_name")[0].getElementsByTagName("a")[0].innerHTML;
-review["url"] = window.location;
-#+END_SRC
-** TODO HTML page
-*** DONE Project Github
-CLOSED: [2016-08-13 Sáb 16:20]
-*** DONE Firebase project
-CLOSED: [2016-08-13 Sáb 16:20]
-*** DONE Firebase Integration
-CLOSED: [2016-08-13 Sáb 17:02]
-*** TODO Core HTML/JS game
-*** TODO CSS
-**** DONE HTML5 Boilerplate
-CLOSED: [2016-08-13 Sáb 16:20]
-**** TODO Responsiveness
-*** TODO Ads integration
-** TODO Additional choices definition algorithm
-** TODO Common Choice and Choice Blacklist interactive dashboard
+[[file:extractor.js]]
+** TODO Self calibrating difficulty
+*** TODO Additional choices definition algorithm
+*** TODO Common Choice and Choice Blacklist interactive dashboard
 This dashboard should show a mysterious review and a lot of game choices.
 You can decide how much each choice is fit to the game.
  Example
@@ -86,5 +69,22 @@ You can decide how much each choice is fit to the game.
     + DayZ (+2)
     + Dying Light (+2)
 ** TODO JSON upload to the database
+** TODO Create Google Play Account
+* TODO Deployment
+** DONE Github Project
+CLOSED: [2016-08-13 Sáb 23:03]
+[[http://github.com/muthdra/steamguess]]
+** DONE Firebase project
+CLOSED: [2016-08-13 Sáb 16:20]
+[[https://steamguess-3d25e.firebaseio.com/]]
+** DONE Firebase Integration
+CLOSED: [2016-08-13 Sáb 17:02]
+[[file:js/main.js]]
+** TODO CSS
+*** DONE HTML5 Boilerplate
+CLOSED: [2016-08-13 Sáb 16:20]
+[[file:css/normalize.min.css]]
+*** TODO Responsiveness
+** TODO Playable MVP Core HTML/JS game
+** TODO Ads integration
 ** TODO Android App
-*** Create Google Play Account

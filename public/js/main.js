@@ -26,6 +26,4 @@
         });
         messagesDiv.innerHTML = messages;
     });
-
-
 })();
