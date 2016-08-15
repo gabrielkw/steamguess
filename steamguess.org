@@ -1,0 +1,90 @@
+#+TITLE: Steam Guess
+#+AUTHOR: Gabriel Antunes
+Steam guess is a game where a Steam game review is shown and the player must guess what game the text is about.
+* Main game loop
+** The player sees a written game review and gets to guess a game
+There are 3 different options in the first round.
++ Examples for the second round 
+  + Quotes:
+    + "Even a locomotive from the 1800's has a better engine than this!"
+      + DayZ
+      + GTA V
+      + Skyrim
+      + Dying Light
+    + "I've nearly finished building my character"
+      + Fallout 3
+      + Super Meat Boy
+      + Just Cause 3
+      + Final Fantasy XIII
+** Player guesses
++ Example
+  + "Even a locomotive from the 1800's has a better engine than this!"
+    + GTA V
+** The answer is revealed
++ Example
+  + "Even a locomotive from the 1800's has a better engine than this!"
+    + DayZ
+** If the player wins
+*** Player scores a point
+*** Another review appears, but now with one more option
+** If the player loses
+*** Score is shown
+*** Game over
+* TODO Database Construction
+** TODO Database schema definition
+#+BEGIN_SRC json
+app : {
+  review : {
+    content : "string",
+    game : game,
+    commonChoices : [game, game],
+    wins : 0,
+    losses : 0
+  },
+  game : {
+    title : "string",
+    similar : [game, game]
+  }
+}
+#+END_SRC
+** TODO Script that abstracts a review page into JSON
+[[file:extractor.js]]
+** TODO Self calibrating difficulty
+*** TODO Additional choices definition algorithm
+*** TODO Common Choice and Choice Blacklist interactive dashboard
+This dashboard should show a mysterious review and a lot of game choices.
+You can decide how much each choice is fit to the game.
+ Example
+  + "literally wont start but im sure its a great game"
+    + Fallout 3 (0)
+    + Skyrim (-2)
+    + GTA V (-2)
+    + Final Fantasy XIII (-2)
+    + DayZ (+2)
+  + "I've nearly finished building my character"
+    + Fallout 3 (+2)
+    + Super Meat Boy (-2)
+    + Just Cause 3 (-2)
+    + Final Fantasy XIII (0)
+    + DayZ (+2)
+    + Dying Light (+2)
+** TODO JSON upload to the database
+** TODO Create Google Play Account
+* TODO Deployment
+** DONE Github Project
+CLOSED: [2016-08-13 Sáb 23:03]
+[[http://github.com/muthdra/steamguess]]
+** DONE Firebase project
+CLOSED: [2016-08-13 Sáb 16:20]
+[[https://steamguess-3d25e.firebaseio.com/]]
+** DONE Firebase Integration
+CLOSED: [2016-08-13 Sáb 17:02]
+[[file:js/main.js]]
+** TODO CSS
+*** DONE HTML5 Boilerplate
+CLOSED: [2016-08-13 Sáb 16:20]
+[[file:css/normalize.min.css]]
+*** TODO Responsiveness
+** TODO Playable MVP Core HTML/JS game
+** TODO Ads integration
+** TODO Android App
