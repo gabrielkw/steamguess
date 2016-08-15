@@ -1,38 +1,39 @@
 #+TITLE: Steam Guess
 #+AUTHOR: Gabriel Antunes
-Steam guess is a game where a Steam game review is shown and the player must guess what game the text is about.
-* Main game loop
-** The player sees a written game review and gets to guess a game
-There are 3 different options in the first round.
-+ Examples for the second round 
-  + Quotes:
-    + "Even a locomotive from the 1800's has a better engine than this!"
-      + DayZ
-      + GTA V
-      + Skyrim
-      + Dying Light
-    + "I've nearly finished building my character"
-      + Fallout 3
-      + Super Meat Boy
-      + Just Cause 3
-      + Final Fantasy XIII
-** Player guesses
-+ Example
-  + "Even a locomotive from the 1800's has a better engine than this!"
-    + GTA V
-** The answer is revealed
-+ Example
-  + "Even a locomotive from the 1800's has a better engine than this!"
-    + DayZ
-** If the player wins
-*** Player scores a point
-*** Another review appears, but now with one more option
-** If the player loses
-*** Score is shown
-*** Game over
+Steam guess is a game where a Steam game review is shown and the player must
+guess what game the text is about.
+* DONE Main Game Loop
+CLOSED: [2016-08-15 Seg 00:14]
+1) The player sees a game review and gets to guess a game
+   There are 5 different options.
+   :examples:
+   + "Even a locomotive from the 1800's has a better engine than this!"
+     - DayZ
+     - GTA V
+     - Skyrim
+     - Dying Light
+     - Super Meat Boy
+   + "I've nearly finished building my character"
+     - Fallout 3
+     - Dying Light
+     - Super Meat Boy
+     - Just Cause 3
+     - Final Fantasy XIII
+   :end:
+2) Player guesses
+   :examples:
+   + "Even a locomotive from the 1800's has a better engine than this!"
+     - GTA V
+   :end:
+3) The answer is revealed
+   :examples:
+   + "Even a locomotive from the 1800's has a better engine than this!"
+     - DayZ
+   :end:
+4) Right answer means an extra point and wrong answer means one less life
 * TODO Database Construction
 ** TODO Database schema definition
-#+BEGIN_SRC json
+#+BEGIN_SRC json schema
 app : {
   review : {
     content : "string",
@@ -47,9 +48,79 @@ app : {
   }
 }
 #+END_SRC
-** TODO Script that abstracts a review page into JSON
+** TODO Review hunter web crawler                                  :js:node:
+Ok, this one might be tricky but maybe I could make a web crawler that
+captures review texts and shows the text on the screen, followed by a
+prompt: "do you want to use this review? (y/n)"
+*** TODO any functionality really
+*** TODO ctrl + z functionality
+** TODO Script that abstracts a review page into JSON              :js:node:
+*** DONE extracting information
+CLOSED: [2016-08-14 Dom 22:44]
+:extractFromLink:
+#+BEGIN_SRC javascript extractor
+var cheerio = require('cheerio');
+var request = require('request');
+var reviews = [];
+function getHTML(err, resp, html) {
+    if (err) {
+        return console.error(err);
+    }
+    const $ = cheerio.load(html);
+    var review = {};
+    review.content = $('#ReviewText').html();
+    review.gameUrl = $('a.panel_btn', '#rightContents').next().attr('href');
+    review.game = review.gameUrl.split('/');
+    review.game = review.game[review.game.length - 1];
+    review.rating = $('.ratingSummary').html();
+    review.commentCount = $('.commentthread_count_label').children().first().html();
+    review.author = {
+        username: $('.profile_small_header_name').children().first().html(),
+        profileUrl: $('.profile_small_header_name').children().attr('href')
+    };
+    console.log(review);
+}
+#+END_SRC
+:END:
+*** TODO extracting pure information
+:makingOf:
+Okay, so let's begin.
+I just found this in the reviews page.
+#+BEGIN_SRC html suspiciousDiv
+<div class="apphub_GetMoreContentWait" id="action_wait" style="display: none;">
+#+END_SRC
+This is the <div> that apppears when new content is loading.
+Hopefully this means there's important code regarding getting new content in apphub.js
+...
+Cool. Theres a waitingForContent variable in apphub_home.js.
+...
+Just take a lookt at this: 
+#+BEGIN_SRC javascript http://steamcommunity-a.akamaihd.net/public/javascript/apphub_home.js/CheckForMoreContent()
+$( 'MoreContentForm' + currentPage ).request( {
+  onComplete: function( transport )
+  {
+    RecordAJAXPageView( transport.request.url );
+  },
+  onFailure: function()
+  {
+    DoneWaitingForContent();
+  },
+  onException: function()
+  {
+    DoneWaitingForContent();
+  },
+  onSuccess: function( transport )
+  {
+    AddContentToPage( $J(transport.responseText) );
+  }
+} );
+#+END_SRC
+[[file:crawler.js][Let's make our own crawler!]]
+*** TODO saving as .json
+*** TODO importing .json
 [[file:extractor.js]]
-** TODO Self calibrating difficulty
+** TODO JSON upload to the database
+* TODO Self calibrating difficulty
 *** TODO Additional choices definition algorithm
 *** TODO Common Choice and Choice Blacklist interactive dashboard
 This dashboard should show a mysterious review and a lot of game choices.
@@ -68,23 +139,31 @@ You can decide how much each choice is fit to the game.
     + Final Fantasy XIII (0)
     + DayZ (+2)
     + Dying Light (+2)
-** TODO JSON upload to the database
-** TODO Create Google Play Account
 * TODO Deployment
-** DONE Github Project
+** DONE Github project
 CLOSED: [2016-08-13 Sáb 23:03]
 [[http://github.com/muthdra/steamguess]]
-** DONE Firebase project
+** DONE Firebase project                                  :firebase:html:js:
 CLOSED: [2016-08-13 Sáb 16:20]
-[[https://steamguess-3d25e.firebaseio.com/]]
-** DONE Firebase Integration
+What's up with this URL? "-3d25e"?
+[[https://steamguess-3d25e.firebaseapp.com/][Landing Page]]
+[[https://steamguess-3d25e.firebaseio.com/][Firebase Console]]
+** DONE Firebase integration                                   :firebase:js:
 CLOSED: [2016-08-13 Sáb 17:02]
 [[file:js/main.js]]
-** TODO CSS
+** TODO CSS                                                       :css:html:
 *** DONE HTML5 Boilerplate
 CLOSED: [2016-08-13 Sáb 16:20]
 [[file:css/normalize.min.css]]
 *** TODO Responsiveness
-** TODO Playable MVP Core HTML/JS game
-** TODO Ads integration
-** TODO Android App
+*** TODO Custom Styles
+** TODO Core HTML/JS game                                      :css:html:js:
+*** TODO Playable MVP 
+*** TODO Security
+**** TODO Captchas
+**** TODO 10 second wait rule
+The 10 second wait rule determines that a player can only send a
+batch (10) of reviews after waiting for 10 seconds.
+** TODO Ads integration                                      :firebase:html:
+* TODO Android App
+** TODO Create Google Play account
