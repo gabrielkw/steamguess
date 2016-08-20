@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js",
+    "start": "node heroku/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -31,6 +31,19 @@ CLOSED: [2016-08-15 Seg 00:14]
      - DayZ
    :end:
 4) Right answer means an extra point and wrong answer means one less life
+* DONE Deployment
+CLOSED: [2016-08-13 Sáb 17:02]
+** DONE Github project
+CLOSED: [2016-08-13 Sáb 23:03]
+[[http://github.com/muthdra/steamguess]]
+** DONE Firebase project                                  :firebase:html:js:
+CLOSED: [2016-08-13 Sáb 16:20]
+What's up with this URL? "-3d25e"?
+[[https://steamguess-3d25e.firebaseapp.com/][Landing Page]]
+[[https://steamguess-3d25e.firebaseio.com/][Firebase Console]]
+** DONE Firebase integration                                   :firebase:js:
+CLOSED: [2016-08-13 Sáb 17:02]
+[[file:js/main.js]]
 * TODO Database Construction
 ** TODO Database schema definition
 #+BEGIN_SRC json schema
@@ -86,18 +99,6 @@ You can decide how much each choice is fit to the game.
     + Dying Light (+2)
 * Database population
 ** TODO Insert tons of reviews
-* TODO Deployment
-** DONE Github project
-CLOSED: [2016-08-13 Sáb 23:03]
-[[http://github.com/muthdra/steamguess]]
-** DONE Firebase project                                  :firebase:html:js:
-CLOSED: [2016-08-13 Sáb 16:20]
-What's up with this URL? "-3d25e"?
-[[https://steamguess-3d25e.firebaseapp.com/][Landing Page]]
-[[https://steamguess-3d25e.firebaseio.com/][Firebase Console]]
-** DONE Firebase integration                                   :firebase:js:
-CLOSED: [2016-08-13 Sáb 17:02]
-[[file:js/main.js]]
 * TODO Heroku Server
 * TODO Web App
 ** TODO CSS                                                       :css:html:
