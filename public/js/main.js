@@ -9,21 +9,18 @@
     };
     firebase.initializeApp(config);
 
-    const txtInput = document.getElementById("txtInput");
-    const submitButton = document.getElementById("submitButton");
-    const messagesDiv = document.getElementById("messages");
-
-    submitButton.addEventListener('click', function() {
-        var newPostKey = firebase.database().ref().child('posts').push(txtInput.value);
-        txtInput.value = "";
-    });
-
-    const dbRef = firebase.database().ref("posts");
-    dbRef.on('value', function(snapshot) {
-        var messages = "";
+    var messages = "";
+    const container = document.getElementById("container");
+    const dbRef = firebase.database().ref("reviews");
+    dbRef.once('value', function(snapshot) {
         snapshot.forEach(function(childObject) {
-            messages += childObject.val() + "<br/>";
+            messages += "<hr><h5><a href='"+childObject.val().profile+"'>"+childObject.val().author+"</a></h5>"+
+            childObject.val().date+"</br>"+
+            childObject.val().found_helpful+"</br>"+
+            childObject.val().hours+"</br>"+
+            childObject.val().recommend+"</br>"+
+            "<h3>"+childObject.val().text + "</h3><br/><br/>";
         });
-        messagesDiv.innerHTML = messages;
+        container.innerHTML = messages;
     });
 })();
