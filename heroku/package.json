@@ -1,0 +1,34 @@
+{
+  "name": "steamguess",
+  "version": "1.0.0",
+  "description": "Guess steam games based on their review",
+  "main": "server.js",
+  "dependencies": {
+    "heroku": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muthdra/steamguess.git"
+  },
+  "keywords": [
+    "steam",
+    "heroku",
+    "firebase",
+    "game",
+    "games"
+  ],
+  "author": "Gabriel Antunes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/muthdra/steamguess/issues"
+  },
+  "engines": {
+    "node": "4.2.6"
+  },
+  "homepage": "https://github.com/muthdra/steamguess#readme"
+}
