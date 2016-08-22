@@ -1,5 +1,21 @@
-(function() {
-    'use strict';
+function ajax() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+            if (xmlhttp.status == 200) {
+                return (xmlhttp.responseText);
+            }
+        }
+    };
+
+    xmlhttp.open("GET", "http://localhost:8081", true);
+    xmlhttp.send();
+}
+
+function getMatch(level) {}
+
+(function () {
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyCvLuqcppcxz_OCTFxGNfwkXh3a0KNE7F4",
@@ -9,18 +25,20 @@
     };
     firebase.initializeApp(config);
 
-    var messages = "";
-    const container = document.getElementById("container");
-    const dbRef = firebase.database().ref("reviews");
-    dbRef.once('value', function(snapshot) {
-        snapshot.forEach(function(childObject) {
-            messages += "<hr><h5><a href='"+childObject.val().profile+"'>"+childObject.val().author+"</a></h5>"+
-            childObject.val().date+"</br>"+
-            childObject.val().found_helpful+"</br>"+
-            childObject.val().hours+"</br>"+
-            childObject.val().recommend+"</br>"+
-            "<h3>"+childObject.val().text + "</h3><br/><br/>";
-        });
-        container.innerHTML = messages;
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            var isAnonymous = user.isAnonymous;
+            var uid = user.uid;
+            document.getElementById("progress1").style.display = "none";
+            console.log("auth: ", uid);
+            // DO STUFF HERE
+        } else {
+            firebase.auth().signInAnonymously().catch(function (error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+            });
+        }
     });
 })();

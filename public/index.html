@@ -4,23 +4,52 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Steam Guess</title>
+    <title>steamguess</title>
     <meta name="description" content="A game about guessing the target of a steam review">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/normalize.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.indigo-pink.min.css" />
 
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
-
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 </head>
 
 <body>
-    <div id="container">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout__title">steamguess</span>
+            </div>
+        </header>
+
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout__title">Drawer</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="#">link</a>
+                <a class="mdl-navigation__link" href="#">link</a>
+                <a class="mdl-navigation__link" href="#">link</a>
+            </nav>
+        </div>
+
+        <main class="mdl-layout__content">
+            <div id="progress1" style="width:100%" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        </main>
+
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">Title</div>
+                <ul class="mdl-mini-footer__link-list">
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy & Terms</a></li>
+                </ul>
+            </div>
+        </footer>
+
+
     </div>
     <script src="js/main.js"></script>
 </body>
