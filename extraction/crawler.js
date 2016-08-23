@@ -2,25 +2,31 @@
 This script is meant to be pasted on your browser's Javascript Console
 The localStorage is widely used here because it keeps data consistent among
 every page of a domain */
+localStorage.steamguess = localStorage.steamguess || JSON.stringify({
+    reviews: [],
+    games: []
+});
+
+/* The variable db is meant to be an object based on the json
+saved on localStorage.steamguess. It can later be saved as json
+to the localStorage with the updateLocalStorage() function */
+var db = JSON.parse(localStorage.steamguess);
 
 // Getting information about the game from the page
 var gameUid = window.location.href.split("app/")[1].split("/")[0];
 var gameName = document.getElementsByClassName("apphub_AppName")[0].innerText;
 
-/* The variable db is meant to be an object based on the json
-saved on localStorage.steamguess. It can later be saved as json
-to the localStorage with the updateLocalStorage() function */
-var db = JSON.parse(localStorage.steamguess) || {
-    reviews: [],
-    games: []
-};
-
-if (window.location.href.indexOf("http://steamcommunity.com/app/" + gameUid + "/reviews/?browsefilter=toprated") < 0) {
-    // Detects URL and properly redirects to the reviews page so it can access the proper localStorage instance
-    if (confirm("This doesn't look like the reviews page! Do you want to go to the reviews page?")) {
-        window.location.href = "http://steamcommunity.com/app/" + gameUid + "/reviews/?browsefilter=toprated";
+if (window.location.href.indexOf("steam") > 0) {
+    if (window.location.href.indexOf("http://steamcommunity.com/app/" + gameUid + "/reviews/?browsefilter=toprated") < 0) {
+        // Detects URL and properly redirects to the reviews page so it can access the proper localStorage instance
+        if (confirm("This doesn't look like the reviews page! Do you want to go to the reviews page?")) {
+            window.location.href = "http://steamcommunity.com/app/" + gameUid + "/reviews/?browsefilter=toprated";
+        }
     }
+} else {
+    alert("This doesn't look like a steam page!");
 }
+
 
 function cleanUp() {
     /* Use in case of mfkdsamkfsdanusdnisd */
@@ -95,6 +101,17 @@ function copyToClipboard(text) {
     /* I use this little gem to extract strings with more
     than 20000 characters */
     window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+}
+
+function copyDb() {
+    copyToClipboard(localStorage.steamguess);
+}
+
+function pasteDb() {
+    /* This is for pasting stringified JSON so you can continue working
+    with previously fetched data */
+    localStorage.steamguess = window.prompt("Paste your JSON here");
+    db = JSON.parse(localStorage.steamguess);
 }
 
 function crawl() {
