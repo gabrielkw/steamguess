@@ -32,7 +32,7 @@ CLOSED: [2016-08-15 Seg 00:14]
    :end:
 4) Right answer means an extra point and wrong answer means one less life
 * DONE Deployment
-CLOSED: [2016-08-13 Sáb 17:02]
+CLOSED: [2016-08-22 Seg 18:30]
 ** DONE Github project
 CLOSED: [2016-08-13 Sáb 23:03]
 [[http://github.com/muthdra/steamguess]]
@@ -44,6 +44,33 @@ What's up with this URL? "-3d25e"?
 ** DONE Firebase integration                                   :firebase:js:
 CLOSED: [2016-08-13 Sáb 17:02]
 [[file:js/main.js]]
+** DONE Heroku App
+CLOSED: [2016-08-22 Seg 18:30]
+* TODO Self calibrating difficulty
+*** DONE Similarity Algorithm definition
+CLOSED: [2016-08-16 Ter 20:12]
+[[file:simcalc.js]]
+I'm going to use the [[https://en.wikipedia.org/wiki/Elo_rating_system][Elo rating system]] like so:
+s[i] += Math.pow(10,(s[i] / 400)) * weight;
+*** TODO Additional choices definition algorithm
+*** TODO Common Choice and Choice Blacklist interactive dashboard
+This dashboard should show a review and a lot of game choices.
+You can decide how much each choice is fit to the game.
+:example:
++ "literally wont start but im sure its a great game"
+  + Fallout 3 (0)
+  + Skyrim (-2)
+  + GTA V (-2)
+  + Final Fantasy XIII (-2)
+  + DayZ (+2)
++ "I've nearly finished building my character"
+  + Fallout 3 (+2)
+  + Super Meat Boy (-2)
+  + Just Cause 3 (-2)
+  + Final Fantasy XIII (0)
+  + DayZ (+2)
+  + Dying Light (+2)
+:END:
 * TODO Database Construction
 ** TODO Database schema definition
 #+BEGIN_SRC json schema
@@ -73,38 +100,17 @@ CLOSED: [2016-08-19 Sex 23:22]
 CLOSED: [2016-08-19 Sex 23:22]
 ** DONE JSON upload to the database
 CLOSED: [2016-08-20 Sáb 03:03]
-* TODO Self calibrating difficulty
-*** DONE Similarity Algorithm definition
-CLOSED: [2016-08-16 Ter 20:12]
-[[file:simcalc.js]]
-I'm going to use the [[https://en.wikipedia.org/wiki/Elo_rating_system][Elo rating system]] like so:
-s[i] += Math.pow(10,(s[i] / 400)) * weight;
-*** TODO Additional choices definition algorithm
-*** TODO Common Choice and Choice Blacklist interactive dashboard
-This dashboard should show a review and a lot of game choices.
-You can decide how much each choice is fit to the game.
- Example
-  + "literally wont start but im sure its a great game"
-    + Fallout 3 (0)
-    + Skyrim (-2)
-    + GTA V (-2)
-    + Final Fantasy XIII (-2)
-    + DayZ (+2)
-  + "I've nearly finished building my character"
-    + Fallout 3 (+2)
-    + Super Meat Boy (-2)
-    + Just Cause 3 (-2)
-    + Final Fantasy XIII (0)
-    + DayZ (+2)
-    + Dying Light (+2)
-* Database population
+* TODO Database population
 ** TODO Insert tons of reviews
 * TODO Heroku Server
+** TODO Cross-domain requests
 * TODO Web App
 ** TODO CSS                                                       :css:html:
 *** DONE HTML5 Boilerplate
 CLOSED: [2016-08-13 Sáb 16:20]
 [[file:css/normalize.min.css]]
+*** DONE Material Design Lite
+CLOSED: [2016-08-22 Seg 18:31]
 *** DONE Styles
 CLOSED: [2016-08-20 Sáb 03:07]
 [[https://getmdl.io]]
